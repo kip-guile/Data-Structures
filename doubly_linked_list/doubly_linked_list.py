@@ -149,7 +149,7 @@ class DoublyLinkedList:
             self.tail = None
 
         elif self.head == node:
-            self.tail = node.next
+            self.head = node.next
             node.delete()
 
         elif self.tail == node:
