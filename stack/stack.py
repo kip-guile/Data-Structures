@@ -12,6 +12,9 @@ return elements in Last In First Out order.
 """
 
 
+from singly_linked_list import LinkedList
+
+
 class Stack:
     def __init__(self):
         self.size = 0
@@ -31,49 +34,68 @@ class Stack:
         return self.storage.pop()
 
 
-class Node:
-    def __init__(self, value=None, next_node=None):
-        self.value = value
-        self.next_node = next_node
-
-    def get_value(self):
-        return self.value
-
-    def get_next(self):
-        return self.next_node
-
-    def set_next(self, new_next):
-        self.next_node = new_next
-
-
-class Stack_LinkedList:
+class Stack:
     def __init__(self):
-        self.head = None
         self.size = 0
+        self.storage = LinkedList()
 
     def __len__(self):
         return self.size
 
     def push(self, value):
-        new_node = Node(value)
+        self.storage.add_to_tail(value)
         self.size += 1
-        if not self.head:
-            self.head = new_node
-        else:
-            current = self.head
-            while current.get_next() is not None:
-                current.get_next()
-            # by the end of this loop, we are at the end of the linked list
-            current.set_next(new_node)
 
     def pop(self):
-        if not self.head:
-            return
-        else:
-            self.size -= 1
-            current = self.head
-            while current.get_next() is not None:
-                prev = current
-                current.get_next()
-            prev.set_next(None)
-            return prev
+        if self.size == 0:
+            return None
+        self.size -= 1
+        return self.storage.remove_tail()
+
+
+# class Node:
+#     def __init__(self, value=None, next_node=None):
+#         self.value = value
+#         self.next_node = next_node
+
+#     def get_value(self):
+#         return self.value
+
+#     def get_next(self):
+#         return self.next_node
+
+#     def set_next(self, new_next):
+#         self.next_node = new_next
+
+
+# class Stack_LinkedList:
+#     def __init__(self):
+#         self.head = None
+#         self.size = 0
+
+#     def __len__(self):
+#         return self.size
+
+#     def push(self, value):
+#         new_node = Node(value)
+#         self.size += 1
+#         if not self.head:
+#             self.head = new_node
+#         else:
+#             current = self.head
+#             while current.get_next() is not None:
+#                 current.get_next()
+#             # by the end of this loop, we are at the end of the linked list
+#             current.set_next(new_node)
+
+#     def pop(self):
+#         if not self.head:
+#             return
+#         else:
+#             self.size -= 1
+#             current = self.head
+#             while current.get_next() is not None:
+#                 prev = current
+#                 current.get_next()
+#             prev.set_next(None)
+#             return prev
