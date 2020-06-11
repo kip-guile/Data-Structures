@@ -9,6 +9,8 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+from dll_stack import Stack
+from dll_queue import Queue
 
 
 class BSTNode:
@@ -66,17 +68,39 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if not node:
+            return None
+        if self.left:
+            self.left.in_order_print(self.left)
+        print(self.value)
+        if self.right:
+            self.right.in_order_print(self.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        q = Queue()
+        q.enqueue(self)
+        while q.len() > 0:
+            cur = q.dequeue()
+            if cur.left:
+                q.enqueue(cur.left)
+            if cur.right:
+                q.enqueue(cur.right)
+            print(cur.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        s = Stack()
+        s.push(self)
+        while s.size > 0:
+            cur = s.pop()
+            if cur.left:
+                s.push(cur.left)
+            if cur.right:
+                s.push(cur.right)
+            print(cur.value)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
